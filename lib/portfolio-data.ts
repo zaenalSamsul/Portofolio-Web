@@ -25,6 +25,7 @@ export type Project = {
   image: string
   imageAlt: string
   previewVideo?: string
+  featuredVisual?: "stuntlytics-dashboard"
   featured: boolean
   metric?: { value: string; label: string }
   role?: string
@@ -120,40 +121,46 @@ export const projects: Project[] = [
     slug: "stuntlytics",
     name: "StuntLytics",
     shortName: "StuntLytics",
-    category: "MACHINE LEARNING / ANALYTICS",
+    category: "HEALTH ANALYTICS / DECISION SUPPORT",
     description:
-      "A stunting-risk prediction and analytics system designed to support data-informed monitoring for local government.",
+      "A child-health analytics workspace that turns regional data, risk signals, and aggregated evidence into coordinated monitoring priorities.",
     image: "/projects/stuntlytics.jpg",
-    imageAlt: "StuntLytics project logo",
+    imageAlt: "StuntLytics child-health analytics workspace",
     previewVideo: "/projects/stuntlytics-preview.mp4",
+    featuredVisual: "stuntlytics-dashboard",
     featured: true,
-    metric: { value: "100K", label: "synthetic data records" },
+    metric: { value: "18", label: "structured screening inputs" },
     problem:
-      "Stunting-risk factors need to be consolidated and interpreted so decision-makers can identify cases that require attention.",
+      "Program teams need one place to compare regional child-health conditions, identify signals that deserve review, and coordinate follow-up without treating analytics as a clinical diagnosis.",
     approach:
-      "The system applies feature engineering and a scikit-learn prediction workflow to a 100,000-record synthetic dataset, then exposes analysis and predictions through a Streamlit dashboard.",
+      "StuntLytics indexes regional data in Elasticsearch, computes maps, trends, correlations, and evidence through a FastAPI service, then presents them in a Next.js workspace. A local scikit-learn pipeline supports family screening, while Gemini can optionally turn aggregated evidence into narrative insights.",
     built: [
-      "A machine-learning workflow for stunting-risk prediction.",
-      "Feature preparation across contributing risk factors.",
-      "An interactive Streamlit dashboard for exploring results.",
+      "A regional dashboard covering indicators, trends, risk distribution, health-worker capacity, water access, and priority areas.",
+      "Risk Map and Action Center views that connect geographic signals to review and follow-up workflows.",
+      "A filterable Data Explorer plus correlation and time-series analysis for deeper investigation.",
+      "Family Screening powered by a local machine-learning pipeline with 18 structured maternal, household, service-access, and health inputs.",
+      "Health Insights that keeps raw records local and exposes only aggregated evidence to the optional Gemini narrative layer.",
     ],
     challenges: [
-      "Representing multiple risk factors in a model-ready feature set.",
-      "Presenting predictions in a format that supports monitoring and reporting.",
+      "Coordinating a multi-service stack across Next.js, FastAPI, Elasticsearch, Redis, and local model inference.",
+      "Separating screening and prioritization signals from diagnosis or clinical recommendations.",
+      "Designing graceful fallbacks so deterministic local summaries continue when Gemini or Redis is unavailable.",
     ],
     results: [
-      "Processed a synthetic dataset containing 100,000 records.",
-      "Delivered model output through an interactive analytics dashboard.",
+      "Unified regional dashboards, risk mapping, exploration, screening, and evidence summaries in one operational workspace.",
+      "Implemented streaming bulk data import with dataset fingerprinting to avoid duplicate Elasticsearch ingestion.",
+      "Kept screening and raw health records inside the local data layer while limiting optional AI narration to aggregated evidence.",
+      "Documented the project as development-stage decision support with no unsupported clinical performance claims.",
     ],
     learnings: [
-      "Model output is more actionable when paired with understandable context and exploration tools.",
-      "Synthetic data is useful for prototyping but should be distinguished clearly from production data.",
+      "Health analytics needs explicit decision-support boundaries, especially when model validation is not sufficient for clinical claims.",
+      "A resilient AI feature should degrade to deterministic evidence rather than make the whole workflow depend on an external model.",
+      "Privacy boundaries are easier to enforce when aggregation happens before the optional narrative layer.",
     ],
-    workflow: ["Risk-factor data", "Feature engineering", "ML model", "Prediction layer", "Streamlit", "Dashboard insight"],
-    tech: ["Python", "Scikit-learn", "Streamlit", "Elasticsearch", "Data Analysis"],
+    workflow: ["Regional dataset", "Elasticsearch", "FastAPI Evidence API", "Local screening model", "Next.js workspace", "Monitoring + follow-up"],
+    tech: ["Next.js 16", "React 19", "TypeScript", "FastAPI", "Elasticsearch", "Redis", "Scikit-learn", "Gemini 2.5", "Docker"],
     links: [
-      { label: "GitHub", href: "https://github.com/zaenalSamsul/StuntLytics-Productiion.git", kind: "github" },
-      { label: "Demo video", href: "https://www.youtube.com/watch?v=9pT6OBXhEdw", kind: "demo" },
+      { label: "GitHub", href: "https://github.com/zaenalSamsul/StuntLytics-Productiion", kind: "github" },
     ],
   },
   {

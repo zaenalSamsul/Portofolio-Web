@@ -29,15 +29,15 @@ export default function CaseStudy({ project }: { project: Project }) {
           </div>
         </header>
 
-        <div className="case-image">
+        <div className={`case-image${project.previewVideo ? " case-image-video" : ""}`}>
           {project.previewVideo ? (
-            <video className="case-image-media" autoPlay loop muted playsInline poster={project.image} aria-label={`${project.name} product preview`}>
+            <video className="case-image-media" controls muted playsInline preload="metadata" poster={project.image} aria-label={`${project.name} product preview`}>
               <source src={project.previewVideo} type="video/mp4" />
             </video>
           ) : (
             <Image src={project.image} alt={project.imageAlt} fill priority sizes="(max-width: 1200px) 100vw, 1200px" />
           )}
-          {project.metric ? <div className="case-metric"><strong>{project.metric.value}</strong><span>{project.metric.label}</span></div> : null}
+          {project.metric && !project.previewVideo ? <div className="case-metric"><strong>{project.metric.value}</strong><span>{project.metric.label}</span></div> : null}
         </div>
 
         <div className="case-body">

@@ -2,24 +2,19 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, Github, Play } from "lucide-react"
 import type { Project } from "@/lib/portfolio-data"
+import StuntlyticsPreview from "./stuntlytics-preview"
 import TechBadge from "./tech-badge"
 
 export default function FeaturedProject({ project, index }: { project: Project; index: number }) {
   return (
     <article className="featured-project">
-      <Link href={`/projects/${project.slug}`} className="project-media" aria-label={`Read ${project.name} case study`}>
-        {project.previewVideo ? (
-          <video
-            className="project-image project-video"
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster={project.image}
-            aria-label={`${project.name} product preview`}
-          >
-            <source src={project.previewVideo} type="video/mp4" />
-          </video>
+      <Link
+        href={`/projects/${project.slug}`}
+        className={`project-media${project.featuredVisual ? " project-media-dashboard" : ""}`}
+        aria-label={`Read ${project.name} case study`}
+      >
+        {project.featuredVisual === "stuntlytics-dashboard" ? (
+          <StuntlyticsPreview />
         ) : (
           <Image
             src={project.image}
@@ -30,7 +25,7 @@ export default function FeaturedProject({ project, index }: { project: Project; 
           />
         )}
         <span className="project-index">0{index + 1}</span>
-        {project.metric ? (
+        {project.metric && !project.featuredVisual ? (
           <div className="metric-card"><strong>{project.metric.value}</strong><span>{project.metric.label}</span></div>
         ) : null}
       </Link>
