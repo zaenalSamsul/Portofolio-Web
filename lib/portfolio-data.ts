@@ -24,6 +24,7 @@ export type Project = {
   description: string
   image: string
   imageAlt: string
+  previewVideo?: string
   featured: boolean
   metric?: { value: string; label: string }
   role?: string
@@ -124,6 +125,7 @@ export const projects: Project[] = [
       "A stunting-risk prediction and analytics system designed to support data-informed monitoring for local government.",
     image: "/projects/stuntlytics.jpg",
     imageAlt: "StuntLytics project logo",
+    previewVideo: "/projects/stuntlytics-preview.mp4",
     featured: true,
     metric: { value: "100K", label: "synthetic data records" },
     problem:
@@ -150,7 +152,7 @@ export const projects: Project[] = [
     workflow: ["Risk-factor data", "Feature engineering", "ML model", "Prediction layer", "Streamlit", "Dashboard insight"],
     tech: ["Python", "Scikit-learn", "Streamlit", "Elasticsearch", "Data Analysis"],
     links: [
-      { label: "GitHub", href: "https://github.com/zaenalSamsul/StuntLytics-Aphacton", kind: "github" },
+      { label: "GitHub", href: "https://github.com/zaenalSamsul/StuntLytics-Productiion.git", kind: "github" },
       { label: "Demo video", href: "https://www.youtube.com/watch?v=9pT6OBXhEdw", kind: "demo" },
     ],
   },
