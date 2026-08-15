@@ -1,15 +1,37 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _inter = Inter({ subsets: ["latin"] })
-
 export const metadata: Metadata = {
-  title: "Zaenal Syamsyul Arief - Data Science & ML Engineer",
-  description: "Portfolio of Zaenal Syamsyul Arief, Data Science & Machine Learning Engineer",
-  generator: "v0.app",
+  metadataBase: new URL("https://zaenalsyamsyularief-porto.vercel.app"),
+  title: {
+    default: "Zaenal Syamsyul Arief | AI Engineer & Data Scientist",
+    template: "%s | Zaenal Syamsyul Arief",
+  },
+  description:
+    "AI Engineer and Data Scientist building applications across Machine Learning, NLP, Computer Vision, data engineering, and LLM integration.",
+  authors: [{ name: "Zaenal Syamsyul Arief" }],
+  creator: "Zaenal Syamsyul Arief",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: "Zaenal Syamsyul Arief | AI Engineer & Data Scientist",
+    description: "Building intelligent systems from data to deployment.",
+    siteName: "Zaenal Syamsyul Arief Portfolio",
+    images: [{ url: "/profile.webp", width: 1200, height: 1200, alt: "Zaenal Syamsyul Arief" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zaenal Syamsyul Arief | AI Engineer & Data Scientist",
+    description: "Building intelligent systems from data to deployment.",
+    images: ["/profile.webp"],
+  },
+  icons: {
+    icon: [{ url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" }, { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" }],
+    apple: "/apple-icon.png",
+  },
 }
 
 export default function RootLayout({
@@ -19,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      <body>
         {children}
         <Analytics />
       </body>
