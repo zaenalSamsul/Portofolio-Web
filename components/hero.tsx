@@ -7,11 +7,6 @@ export default function Hero() {
     <section id="home" className="hero">
       <div className="section-shell hero-layout">
         <div className="hero-copy">
-          <div className="hero-status hero-enter hero-delay-1">
-            <span className="status-mark" aria-hidden="true" />
-            AI · DATA · PRODUCT ENGINEERING
-          </div>
-
           <p className="hero-name hero-enter hero-delay-2">Hi, I&apos;m Zaenal Syamsyul Arief.</p>
           <h1 className="hero-enter hero-delay-3">
             AI Engineer <span>&amp; Data Scientist.</span>

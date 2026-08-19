@@ -124,8 +124,8 @@ export const projects: Project[] = [
     category: "HEALTH ANALYTICS / DECISION SUPPORT",
     description:
       "A child-health analytics workspace that turns regional data, risk signals, and aggregated evidence into coordinated monitoring priorities.",
-    image: "/projects/stuntlytics.jpg",
-    imageAlt: "StuntLytics child-health analytics workspace",
+    image: "/projects/stuntlytics-logo.png",
+    imageAlt: "ZA logo used by the StuntLytics project",
     previewVideo: "/projects/stuntlytics-preview.mp4",
     featuredVisual: "stuntlytics-dashboard",
     featured: true,
@@ -196,6 +196,45 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/zaenalSamsul/System-Rekomendasi-Film", kind: "github" },
     ],
   },
+]
+
+export type Repository = {
+  name: string
+  topic: string
+  href: string
+}
+
+const githubRepository = (name: string) => `https://github.com/zaenalSamsul/${name}`
+
+export const repositories: Repository[] = [
+  { name: "Agrimind", topic: "Applied AI", href: githubRepository("Agrimind") },
+  { name: "Research-Agent", topic: "AI Agent", href: githubRepository("Research-Agent") },
+  { name: "Price-Tracker-Agent", topic: "AI Agent", href: githubRepository("Price-Tracker-Agent") },
+  { name: "StuntLytics-Productiion", topic: "Health Analytics", href: githubRepository("StuntLytics-Productiion") },
+  { name: "StuntLytics-Aphacton", topic: "Health Analytics", href: githubRepository("StuntLytics-Aphacton") },
+  { name: "Jagain", topic: "Applied AI", href: githubRepository("Jagain") },
+  { name: "Jagain-web", topic: "Web Application", href: githubRepository("Jagain-web") },
+  { name: "Customer-Support-Agent-", topic: "AI Agent", href: githubRepository("Customer-Support-Agent-") },
+  { name: "e-wallet-sentiment", topic: "NLP", href: githubRepository("e-wallet-sentiment") },
+  { name: "Portofolio-Web", topic: "Web Development", href: githubRepository("Portofolio-Web") },
+  { name: "BumiCare", topic: "Applied AI", href: githubRepository("BumiCare") },
+  { name: "PlantApp-Detect", topic: "Computer Vision", href: githubRepository("PlantApp-Detect") },
+  { name: "NewWatch", topic: "Web Application", href: githubRepository("NewWatch") },
+  { name: "PipelineETLProdukFashion", topic: "Data Engineering", href: githubRepository("PipelineETLProdukFashion") },
+  { name: "System-Rekomendasi-Film", topic: "Recommendation System", href: githubRepository("System-Rekomendasi-Film") },
+  { name: "MyCareAi", topic: "NLP / Applied AI", href: githubRepository("MyCareAi") },
+  { name: "NewsHive", topic: "Web Application", href: githubRepository("NewsHive") },
+  { name: "Klasifikasi-Gambar-Rice-Image-Klasifikasi", topic: "Computer Vision", href: githubRepository("Klasifikasi-Gambar-Rice-Image-Klasifikasi") },
+  { name: "Analisis-Sentimen-Aplikasi-Dana", topic: "NLP", href: githubRepository("Analisis-Sentimen-Aplikasi-Dana") },
+  { name: "CHEST-X-RAY_PNEUMONIA_COVID-19", topic: "Computer Vision", href: githubRepository("CHEST-X-RAY_PNEUMONIA_COVID-19") },
+  { name: "Predictive-Obesity_Level", topic: "Machine Learning", href: githubRepository("Predictive-Obesity_Level") },
+  { name: "Covid-19-CNN", topic: "Deep Learning", href: githubRepository("Covid-19-CNN") },
+  { name: "Pengolahan-Citra-Group-adaption-Jurnal", topic: "Computer Vision", href: githubRepository("Pengolahan-Citra-Group-adaption-Jurnal") },
+  { name: "Supervised_Learning_Student_Scores", topic: "Machine Learning", href: githubRepository("Supervised_Learning_Student_Scores") },
+  { name: "Stomach-Cancer-Detection", topic: "Computer Vision", href: githubRepository("Stomach-Cancer-Detection") },
+  { name: "Pendeteksian-Tepi", topic: "Image Processing", href: githubRepository("Pendeteksian-Tepi") },
+  { name: "UTS_PENGOLAHAN_CITRA", topic: "Image Processing", href: githubRepository("UTS_PENGOLAHAN_CITRA") },
+  { name: "PengolahanCitra", topic: "Image Processing", href: githubRepository("PengolahanCitra") },
 ]
 
 export const experiences = [

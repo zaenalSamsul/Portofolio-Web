@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Activity, BarChart3, Database, MapPinned, ShieldCheck } from "lucide-react"
 
 export default function StuntlyticsPreview() {
@@ -9,7 +10,10 @@ export default function StuntlyticsPreview() {
     >
       <div className="stuntlytics-window">
         <div className="stuntlytics-window-bar">
-          <div className="stuntlytics-brand"><span>SL</span><strong>StuntLytics</strong></div>
+          <div className="stuntlytics-brand">
+            <span><Image src="/projects/stuntlytics-logo.png" alt="" width={31} height={19} /></span>
+            <strong>StuntLytics</strong>
+          </div>
           <div className="stuntlytics-window-dots"><i /><i /><i /></div>
         </div>
 

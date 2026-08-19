@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
-import { FileText, Github, Linkedin, Menu, X } from "lucide-react"
-import { siteConfig } from "@/lib/portfolio-data"
+import { Menu, X } from "lucide-react"
 
 const navItems = [
   { label: "Home", href: "#home", id: "home" },
@@ -48,8 +48,7 @@ export default function Header() {
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <nav className="nav-shell" aria-label="Primary navigation">
         <Link href="/#home" className="wordmark" aria-label="Zaenal Syamsyul Arief, home">
-          <span>ZA</span>
-          <span className="wordmark-dot" aria-hidden="true" />
+          <Image src="/za-logo.png" alt="" width={44} height={44} priority className="wordmark-logo" />
         </Link>
 
         <div className="desktop-nav">
@@ -66,15 +65,6 @@ export default function Header() {
         </div>
 
         <div className="nav-actions">
-          <a className="resume-link" href={siteConfig.resume} download>
-            <FileText size={16} aria-hidden="true" /> Resume
-          </a>
-          <a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="Open Zaenal's GitHub profile">
-            <Github size={18} aria-hidden="true" />
-          </a>
-          <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" aria-label="Open Zaenal's LinkedIn profile">
-            <Linkedin size={18} aria-hidden="true" />
-          </a>
           <button
             type="button"
             className="menu-toggle"
@@ -95,10 +85,6 @@ export default function Header() {
             {item.label}
           </Link>
         ))}
-        <a href={siteConfig.resume} download onClick={() => setIsOpen(false)}>
-          <span>07</span>
-          Resume <FileText size={16} aria-hidden="true" />
-        </a>
       </div>
     </header>
   )
