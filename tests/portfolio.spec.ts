@@ -201,13 +201,14 @@ test.describe("editorial pages and navigation", () => {
     await expect(page).toHaveURL(new URL("/work", baseURL).href)
   })
 
-  test("navigation reveals replay across routes and cancel immediately when reduced motion is enabled", async ({ page }) => {
+  test("navigation reveals replay across routes and cancel immediately when reduced motion is enabled", async ({ page, browser }) => {
     const waitForEntry = (pathname: string) => page.waitForFunction((expectedPathname) => {
       if (location.pathname !== expectedPathname) return null
       const scope = document.getElementById(`${expectedPathname.slice(1)}-title`)?.closest(".page-transition")
       return scope?.getAnimations({ subtree: true }).find((animation) =>
         animation.playState === "running" && !(animation instanceof CSSAnimation) && !(animation instanceof CSSTransition)
-        && !(animation.effect as KeyframeEffect | null)?.target?.matches(".page-curtain"),
+        && !(animation.effect as KeyframeEffect | null)?.target?.matches(".page-curtain")
+        && (animation.effect as KeyframeEffect | null)?.getKeyframes().some((frame) => String(frame.filter).includes("blur(")),
       ) ?? null
     }, pathname, { polling: "raf" })
     const waitForCurtain = (pathname: string) => page.waitForFunction((expectedPathname) => {
@@ -219,16 +220,18 @@ test.describe("editorial pages and navigation", () => {
     const finishEntries = () => page.locator(".page-transition").evaluate(async (element) => {
       await Promise.all(element.getAnimations({ subtree: true }).map((animation) => animation.finished.catch(() => {})))
     })
-    const hoverAndRelease = async (selector: string) => {
+    const arrowOpacities = () => page.locator(".home-nav-display>svg").evaluateAll((elements) => elements.map((element) => Number(getComputedStyle(element).opacity)))
+    const hoverAndRelease = async (selector: string, arrowIndex?: number) => {
       const link = page.locator(selector)
       const text = link.locator(".sweep-text")
       await link.hover()
       await expect(text.locator(".sweep-text-fill")).toHaveCSS("clip-path", "inset(0px)")
+      if (arrowIndex !== undefined) await expect.poll(arrowOpacities, "Only the hovered navigation arrow appears").toEqual([0, 1, 2].map((index) => index === arrowIndex ? 1 : 0))
       await expect.poll(() => text.evaluate((element) => {
         const transform = new DOMMatrixReadOnly(getComputedStyle(element).transform)
         return transform.c < -0.1 && transform.e > 10
       }), "Mouse hover visibly skews and moves the text").toBe(true)
-      await expect.poll(() => text.evaluate((element) => element.getAnimations().some((animation) => animation.playState === "running")), "Hover motion settles").toBe(false)
+      await expect.poll(() => text.evaluate((element) => element.getAnimations({ subtree: true }).some((animation) => animation.playState === "running")), "Hover motion settles").toBe(false)
       const settled = await text.evaluate((element) => {
         const transform = new DOMMatrixReadOnly(getComputedStyle(element).transform)
         return { skew: transform.c, x: transform.e }
@@ -237,8 +240,9 @@ test.describe("editorial pages and navigation", () => {
       expect(settled.x).toBeCloseTo(20, 1)
       await page.mouse.move(0, 0)
       await expect.poll(() => text.evaluate((element) =>
-        new DOMMatrixReadOnly(getComputedStyle(element).transform).isIdentity && !element.getAnimations().some((animation) => animation.playState === "running"),
+        new DOMMatrixReadOnly(getComputedStyle(element).transform).isIdentity && !element.getAnimations({ subtree: true }).some((animation) => animation.playState === "running"),
       ), "Text returns to its original position after the mouse leaves").toBe(true)
+      if (arrowIndex !== undefined) await expect.poll(arrowOpacities, "Navigation arrows hide after the mouse leaves").toEqual([0, 0, 0])
     }
 
     await page.goto("/", { waitUntil: "domcontentloaded" })
@@ -253,10 +257,16 @@ test.describe("editorial pages and navigation", () => {
     await homeCurtain.evaluate((animation) => animation!.play())
     await finishEntries()
     await expect.poll(curtainScale, "The opening curtain fully clears the page").toBe(0)
+    await expect(page.locator(".sweep-letter")).toHaveCount(0)
     const originalDocument = await page.evaluateHandle(() => document)
     const work = page.locator(".home-navigation a[href='/work']")
     await page.mouse.move(0, 0)
-    await hoverAndRelease(".home-navigation a[href='/work']")
+    await expect.poll(arrowOpacities, "Desktop navigation arrows start hidden").toEqual([0, 0, 0])
+    for (const [index, href] of ["/work", "/about", "/contact"].entries()) await hoverAndRelease(`.home-navigation a[href='${href}']`, index)
+    await focusByKeyboard(page, ".home-navigation a[href='/about']")
+    await expect.poll(arrowOpacities, "Keyboard focus reveals only its navigation arrow").toEqual([0, 1, 0])
+    await page.locator(".home-navigation a[href='/about']").evaluate((element) => (element as HTMLElement).blur())
+    await expect.poll(arrowOpacities).toEqual([0, 0, 0])
     await expect(work).toHaveCSS("cursor", "pointer")
 
     const [workEntry, workCurtain] = await Promise.all([waitForEntry("/work"), waitForCurtain("/work"), work.click()])
@@ -264,8 +274,18 @@ test.describe("editorial pages and navigation", () => {
     expect(await workCurtain.evaluate((animation) => animation?.playState), "Pointer navigation plays the route curtain").toBe("running")
     expect(await curtainScale(), "The route curtain is visible after pointer navigation").toBeGreaterThan(0)
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
+    const entryBlur = await workEntry.evaluate((animation) => {
+      animation!.pause()
+      const effect = animation!.effect as KeyframeEffect
+      const timing = effect.getTiming()
+      animation!.currentTime = (timing.delay ?? 0) + Number(timing.duration) / 2
+      return parseFloat(getComputedStyle(effect.target!).filter.match(/blur\(([\d.]+)px\)/)?.[1] ?? "0")
+    })
+    expect(entryBlur, "Text is visibly blurred midway through its route reveal").toBeGreaterThan(0)
+    await workEntry.evaluate((animation) => animation!.play())
     await finishEntries()
     await expect.poll(() => workEntry.evaluate((animation) => animation?.playState), "Completed reveals release their animation effects").toBe("idle")
+    await expect.poll(() => workEntry.evaluate((animation) => getComputedStyle((animation!.effect as KeyframeEffect).target!).filter), "Revealed text is sharp after entry finishes").toBe("none")
     await hoverAndRelease(".work-closing .sweep-link")
 
     const [aboutEntry] = await Promise.all([
@@ -306,6 +326,16 @@ test.describe("editorial pages and navigation", () => {
     await expect.poll(() => contactEntry.evaluate((animation) => animation?.playState)).toBe("idle")
     await expect.poll(curtainScale).toBe(0)
     await expect(page.locator(".contact-email")).toBeVisible()
+
+    const touchContext = await browser.newContext({ hasTouch: true, isMobile: true, viewport: { width: 390, height: 844 }, reducedMotion: "reduce" })
+    try {
+      const touchPage = await touchContext.newPage()
+      await touchPage.goto(new URL("/", baseURL).href)
+      expect(await touchPage.evaluate(() => matchMedia("(hover: hover)").matches), "Touch coverage must use a device without hover").toBe(false)
+      await expect.poll(() => touchPage.locator(".home-nav-display>svg").evaluateAll((elements) => elements.map((element) => Number(getComputedStyle(element).opacity))), "Touch navigation keeps all arrows visible").toEqual([1, 1, 1])
+    } finally {
+      await touchContext.close()
+    }
   })
 
   test("About owns the original portrait, reviewed experience and skill evidence", async ({ page }) => {

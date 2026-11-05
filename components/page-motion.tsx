@@ -13,7 +13,8 @@ const entrySelector = [
   ".case-header > *",
 ].join(",")
 
-const scrollSelector = ".project-article, .work-closing, .editorial-section-heading"
+const scrollTextSelector = ".project-article h2, .work-closing"
+const scrollSelector = `${scrollTextSelector}, .editorial-section-heading`
 
 function milliseconds(value: string, fallback: number) {
   const duration = parseFloat(value)
@@ -34,7 +35,8 @@ export default function PageMotion({ children }: { children: ReactNode }) {
 
     const tokens = getComputedStyle(document.documentElement)
     const duration = Math.max(0, Math.min(800, milliseconds(tokens.getPropertyValue("--duration-page"), 750)))
-    const stagger = Math.max(0, Math.min(90, milliseconds(tokens.getPropertyValue("--duration-stagger"), 90)))
+    const textDuration = Math.max(0, Math.min(600, milliseconds(tokens.getPropertyValue("--duration-text"), 500)))
+    const stagger = Math.max(0, Math.min(100, milliseconds(tokens.getPropertyValue("--duration-stagger"), 100)))
     const easing = tokens.getPropertyValue("--ease-out").trim() || "cubic-bezier(0.23, 1, 0.32, 1)"
     const entryEasing = tokens.getPropertyValue("--ease-page").trim() || tokens.getPropertyValue("--ease-in-out").trim() || easing
     const screenDuration = Math.max(0, Math.min(1000, milliseconds(tokens.getPropertyValue("--duration-screen"), 900)))
@@ -69,15 +71,19 @@ export default function PageMotion({ children }: { children: ReactNode }) {
     }
 
     const animate = (element: HTMLElement, index = 0, text = false, startDelay = 0) => {
-      if (stopped || preference.matches || !element.isConnected || element.contains(document.activeElement) || duration === 0) return
+      const elementDuration = text ? textDuration : duration * 0.65
+      if (stopped || preference.matches || !element.isConnected || element.contains(document.activeElement) || elementDuration === 0) return
       const delay = startDelay + Math.min(index, 3) * stagger
-      const distance = element.matches(".home-navigation > a") ? 36 : 28
-      // Preserve the stagger at both ends, instead of making later items rush to finish together.
-      const elementDuration = duration * (text ? 0.8 : 0.65)
-      const animation = element.animate([
-        { opacity: 0, transform: `translate3d(0, ${distance}px, 0)`, clipPath: text ? "inset(0 0 100% 0)" : "inset(0 0 6% 0)" },
+      const distance = text ? pathname === "/" ? 20 : -20 : 28
+      // The reference's brief blur belongs only to these small typography targets, never cards or media.
+      const keyframes: Keyframe[] = text ? [
+        { opacity: 0.001, filter: "blur(10px)", transform: `translate3d(0, ${distance}px, 0)` },
+        { opacity: 1, filter: "blur(0px)", transform: "translate3d(0, 0, 0)" },
+      ] : [
+        { opacity: 0, transform: `translate3d(0, ${distance}px, 0)`, clipPath: "inset(0 0 6% 0)" },
         { opacity: 1, transform: "translate3d(0, 0, 0)", clipPath: "inset(0 0 0 0)" },
-      ], { duration: elementDuration, delay, easing: text ? entryEasing : easing, fill: "both" })
+      ]
+      const animation = element.animate(keyframes, { duration: elementDuration, delay, easing: text ? entryEasing : easing, fill: "both" })
       trackAnimation(element, animation)
     }
 
@@ -107,7 +113,8 @@ export default function PageMotion({ children }: { children: ReactNode }) {
           { transform: "scaleY(1)" },
           { transform: "scaleY(0)" },
         ], { duration: screenDuration, easing: screenEasing, fill: "both" }))
-        appearanceDelay = pathname === "/" ? 350 : 200
+        // Match the reference's first text entry at 600 ms, followed by its sibling stagger.
+        appearanceDelay = 600
       }
       const entries = Array.from(scope.querySelectorAll<HTMLElement>(entrySelector))
       const candidates = [...entries, ...scope.querySelectorAll<HTMLElement>(scrollSelector)]
@@ -122,7 +129,7 @@ export default function PageMotion({ children }: { children: ReactNode }) {
         if (bounds.top < viewportHeight) {
           const index = siblingOrder.get(element.parentElement) ?? 0
           siblingOrder.set(element.parentElement, index + 1)
-          const text = entries.includes(element)
+          const text = entries.includes(element) || element.matches(scrollTextSelector)
           animate(element, index, text, text ? appearanceDelay : 0)
         } else {
           waiting.add(element)
@@ -137,7 +144,7 @@ export default function PageMotion({ children }: { children: ReactNode }) {
           const element = observation.target as HTMLElement
           observer?.unobserve(element)
           waiting.delete(element)
-          animate(element, index++, entries.includes(element))
+          animate(element, index++, entries.includes(element) || element.matches(scrollTextSelector))
         }
       }, { rootMargin: "0px 0px 60px 0px", threshold: 0.08 })
       for (const element of waiting) observer.observe(element)

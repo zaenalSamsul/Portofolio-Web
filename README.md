@@ -8,10 +8,10 @@ Gunakan Node.js minimal 20.9 dan npm. Alur ini memakai `package-lock.json`.
 
 ```sh
 npm ci
-npm run dev -- --port 3001
+npm run dev -- --port 3000
 ```
 
-Pratinjau lokal: `http://localhost:3001`. Untuk menjalankan build produksi dan pengujian:
+Pratinjau development: `http://localhost:3000` (alias `http://127.0.0.1:3000` juga didukung). `allowedDevOrigins` secara eksplisit mengizinkan host loopback `127.0.0.1` agar koneksi HMR dan hydration tidak ditolak. Untuk menjalankan build produksi dan pengujian pada port 3001:
 
 ```sh
 npm run validate:content
@@ -132,3 +132,9 @@ Review manusia yang tetap diperlukan: fakta/peran yang belum pasti, kualitas gam
 Revisi tipografi dan motion menaikkan teks kecil 1-3 px, menyamakan ukuran teks footer, serta menghapus label pembuka dan lokasi berulang. Menu Work/About/Contact dan CTA Let's talk memiliki sapuan warna dengan panah dekat teks. Reveal memakai Web Animations API tanpa dependensi tambahan, diulang pada perubahan pathname dan dibatalkan saat reduced motion aktif atau fokus keyboard masuk. Baseline HTML tetap terlihat tanpa JavaScript. Build produksi, lint, dan delapan pengujian browser terarah lulus, termasuk grid 2 x 2, hover, pembatalan animasi, navigasi, reduced motion, tanpa JavaScript, serta ukuran 390/768/1440 px. Pemeriksaan visual tambahan pada 320/390/768 px tidak menemukan overflow atau browser error.
 
 Koreksi motion berikutnya memeriksa HTML serta modul publik Lauren Waller secara langsung. Hover menu dan CTA kini memiringkan teks 15 derajat dan menggesernya 20 px dengan spring CSS 700 ms, selain sapuan warna. Reveal teks memiliki jeda bertahap yang terlihat, dan tirai dekoratif 900 ms membuka halaman dari atas pada Home serta dari bawah pada halaman lain. Warna tirai dikontraskan terhadap halaman (ink pada latar kertas, paper pada Contact). Tirai tidak menangkap klik dan langsung dibatalkan untuk reduced motion atau fokus keyboard. Tujuh pengujian browser terarah lulus, termasuk posisi/skew hover, tirai yang benar-benar berjalan saat klik, pembersihan animasi, keyboard, tanpa JavaScript, reduced motion, dan ukuran responsif; pemeriksaan hover tambahan 320/390/768 px tidak menemukan overflow atau browser error.
+
+Foto informal pada Contact kini menjadi latar besar yang samar, dilapisi gradasi hijau agar teks tetap jelas. Pada desktop foto menyatu dari sisi kanan; pada ponsel foto memenuhi panel dengan opacity lebih rendah. Caption tetap tersedia, dan email, profil sosial, serta CV berada di atas lapisan gambar. Build produksi, lint, serta lima pengujian browser terarah lulus. Pemeriksaan visual pada 1440/390 px dan pengukuran 320/390/768/1440 px tidak menemukan overflow atau browser error.
+
+Perbaikan hover berikutnya menyembunyikan panah menu desktop sampai pilihan terkait di-hover atau menerima fokus keyboard; perangkat tanpa hover tetap menampilkan panah. Teks menu dan CTA memakai rollover huruf bergantian, selain skew dan sapuan warna. Label asli tetap tersedia untuk pembaca layar. Efek CSS bekerja tanpa menunggu hydration, sementara reduced motion tetap menghentikan gerakan. Waktu masuk judul digeser agar tidak selesai di balik tirai. Build, lint, dan tujuh pengujian browser terarah lulus; pemeriksaan default Chromium pada localhost:3000, 127.0.0.1:3000, serta 127.0.0.1:3001 memastikan hydration aktif, hanya panah pilihan yang disorot terlihat, dan tidak ada browser error.
+
+Rujukan animasi terakhir adalah rekaman Lauren Waller milik pemilik (46,3 detik). Rollover per huruf telah diganti gerakan kata utuh: skew 15 derajat dan pergeseran 20 px dengan spring 700 ms/bounce .25. Teks masuk memakai blur 10 px menuju tajam selama 500 ms, gerakan vertikal 20 px, jeda mulai 600 ms, dan stagger 100 ms. Judul proyek mendapat hover serupa; gambar/video tidak ikut diburamkan. Panah hover saja tetap mengikuti permintaan pemilik. Build, lint, dan tujuh tes browser terarah lulus; hover judul proyek juga diperiksa pada 320/390/768/1440 px tanpa overflow. Rekaman hasil lokal dibuat untuk peninjauan gerakan.
