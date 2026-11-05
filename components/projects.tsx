@@ -12,7 +12,7 @@ export default function Projects() {
     </header>
     <div className="work-grid">{featuredProjects.map((project, index) => <FeaturedProject key={project.slug} project={project} index={index} total={featuredProjects.length} />)}</div>
     <section className="work-archive" aria-labelledby="archive-title">
-      <div className="archive-intro"><h2 id="archive-title">From the archive.</h2><p>More experiments, tools, and technical explorations.</p></div>
+      <div className="archive-intro"><h2 id="archive-title">More project</h2><p>More experiments, tools, and technical explorations.</p></div>
       <div className="archive-list">
         {publishedProjects.filter((project) => !project.featured).map((project) => <Link className="archive-item" href={`/projects/${project.slug}`} key={project.slug}><span>{project.shortName}</span><span>{project.category}</span><ArrowUpRight size={23} aria-hidden="true" /></Link>)}
         {repositories.filter((repository) => !publishedProjects.some((project) => project.links.some((link) => link.href === repository.href))).map((repository) => <a className="archive-item" key={repository.href} href={repository.href} target="_blank" rel="noreferrer"><span>{repository.name}<span className="archive-description">{repository.description}</span></span><span>{repository.topic}</span><ArrowUpRight size={23} aria-hidden="true" /></a>)}

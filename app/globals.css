@@ -109,7 +109,7 @@ main:focus { outline:none; } [hidden] { display:none !important; }
 .about-profile { max-width:440px; }
 .about-portrait-image { display:block; width:100%; height:auto; aspect-ratio:.9; object-fit:cover; object-position:50% 37%; }
 .about-profile-caption { display:grid; gap:2px; margin-top:17px; font-size:14px; color:var(--muted); }
-.about-profile-caption>span:first-child { color:var(--ink); font-size:16px; }
+.about-profile-caption>span:first-child { color:var(--ink); font-size:20px; font-weight:500; line-height:1.5; }
 .about-copy { max-width:610px; }
 .about-copy>p { font-size:18px; line-height:1.85; margin-bottom:24px; }
 .about-copy .about-lead { font-family:var(--serif); font-size:clamp(35px,3.7vw,52px); line-height:1.12; letter-spacing:-.015em; margin-bottom:30px; }
