@@ -1,10 +1,5 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
-import About from "@/components/about"
-import Experience from "@/components/experience"
-import Projects from "@/components/projects"
-import Skills from "@/components/skills"
-import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 import { siteConfig } from "@/lib/portfolio-data"
 
@@ -23,15 +18,9 @@ export default function Home() {
 
   return (
     <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Header />
-      <main id="main-content">
+      <Header home />
+      <main id="main-content" tabIndex={-1} className="home-main">
         <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Contact />
       </main>
       <Footer />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760" fill="none">
+  <rect width="1000" height="760" fill="#e9eef2"/>
+  <g font-family="Arial, sans-serif">
+    <circle cx="76" cy="72" r="7" fill="#547c8c"/>
+    <text x="98" y="81" fill="#273f4c" font-size="28" font-weight="600">StuntLytics</text>
+    <text x="850" y="78" text-anchor="end" fill="#5b727b" font-size="12" letter-spacing="2">HEALTH ANALYTICS</text>
+    <text x="62" y="174" fill="#476876" font-size="13" letter-spacing="2">FROM REGIONAL DATA TO LOCAL CONTEXT</text>
+    <text x="62" y="228" fill="#273f4c" font-size="42" font-weight="500">Evidence for a</text>
+    <text x="62" y="279" fill="#273f4c" font-size="42" font-weight="500">clearer picture.</text>
+    <path d="M200 413H810" stroke="#91a7b0" stroke-width="2"/>
+    <rect x="62" y="343" width="252" height="154" rx="12" fill="#f9fbfc" stroke="#c3d0d6"/>
+    <rect x="374" y="343" width="252" height="154" rx="12" fill="#355967"/>
+    <rect x="686" y="343" width="252" height="154" rx="12" fill="#f9fbfc" stroke="#c3d0d6"/>
+    <g font-size="12" letter-spacing="1"><text x="84" y="376" fill="#567582">01 / REGIONAL DATA</text><text x="396" y="376" fill="#d2e3e8">02 / EVIDENCE</text><text x="708" y="376" fill="#567582">03 / WORKSPACE</text></g>
+    <g font-size="22"><text x="84" y="420" fill="#273f4c">Collect &amp; index</text><text x="396" y="420" fill="#fff">Analyze &amp; screen</text><text x="708" y="420" fill="#273f4c">Explore &amp; review</text></g>
+    <g font-size="14"><text x="84" y="458" fill="#5b727b">Elasticsearch</text><text x="396" y="458" fill="#d2e3e8">FastAPI + local ML</text><text x="708" y="458" fill="#5b727b">Next.js interface</text></g>
+    <circle cx="344" cy="413" r="5" fill="#638b99"/><circle cx="656" cy="413" r="5" fill="#638b99"/>
+    <g font-size="13" fill="#3d6170">
+      <rect x="62" y="537" width="218" height="43" rx="21" fill="none" stroke="#bbccd3"/><text x="171" y="564" text-anchor="middle">Regional dashboard</text>
+      <rect x="299" y="537" width="140" height="43" rx="21" fill="none" stroke="#bbccd3"/><text x="369" y="564" text-anchor="middle">Risk mapping</text>
+      <rect x="458" y="537" width="223" height="43" rx="21" fill="none" stroke="#bbccd3"/><text x="569" y="564" text-anchor="middle">18-input family screening</text>
+    </g>
+    <path d="M62 640H938" stroke="#bacbd2"/>
+    <text x="62" y="678" fill="#5b727b" font-size="12" letter-spacing="2">ARCHITECTURE OVERVIEW</text>
+    <text x="938" y="678" text-anchor="end" fill="#5b727b" font-size="13">Decision support · Development project</text>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760" fill="none">
+  <title>MyCareAI architecture overview</title>
+  <desc>A three-stage workflow from a React interface and Node.js gateway to a Python, Flask, and TensorFlow emotion classifier, followed by a Google Vertex AI conversation.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="10" refX="7" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1L6 5L1 9" stroke="#8b81a6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="760" fill="#f0eef7"/>
+  <g font-family="Inter, Arial, sans-serif" fill="#4c4769">
+    <text x="68" y="83" font-size="29" font-weight="650" letter-spacing="-1">MyCareAI<tspan fill="#9589b5">.</tspan></text>
+    <text x="68" y="137" fill="#817594" font-size="12" font-weight="700" letter-spacing="2.5">NLP + GENERATIVE AI</text>
+    <text x="65" y="211" font-size="49" font-weight="600" letter-spacing="-2.2">From emotion signals</text>
+    <text x="65" y="269" font-size="49" font-weight="600" letter-spacing="-2.2">to adaptive conversation.</text>
+
+    <rect x="68" y="344" width="250" height="245" rx="14" fill="#faf9fd" stroke="#d5cfe3"/>
+    <rect x="375" y="344" width="250" height="245" rx="14" fill="#faf9fd" stroke="#c9bfdc"/>
+    <rect x="682" y="344" width="250" height="245" rx="14" fill="#4c4769"/>
+
+    <g fill="none" stroke="#817397" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M98 378H126A5 5 0 0 1 131 383V400A5 5 0 0 1 126 405H109L99 413V405H98A5 5 0 0 1 93 400V383A5 5 0 0 1 98 378Z"/>
+      <path d="M103 388H121M103 396H115"/>
+      <rect x="402" y="378" width="34" height="30" rx="6"/>
+      <path d="M410 388H428M410 397H420M419 372V378M419 408V414M396 393H402M436 393H442"/>
+    </g>
+    <g fill="none" stroke="#d4cbe5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M710 379H737A5 5 0 0 1 742 384V401A5 5 0 0 1 737 406H723L712 414V406H710A5 5 0 0 1 705 401V384A5 5 0 0 1 710 379Z"/>
+      <path d="M723 385L725 391L731 393L725 395L723 401L721 395L715 393L721 391Z"/>
+    </g>
+
+    <text x="290" y="391" fill="#a49ab6" text-anchor="end" font-size="11" font-weight="600">01</text>
+    <text x="597" y="391" fill="#a49ab6" text-anchor="end" font-size="11" font-weight="600">02</text>
+    <text x="904" y="391" fill="#c4bad7" text-anchor="end" font-size="11" font-weight="600">03</text>
+
+    <text x="93" y="460" font-size="24" font-weight="600" letter-spacing="-0.7">User input</text>
+    <text x="400" y="460" font-size="23" font-weight="600" letter-spacing="-0.8">Emotion classifier</text>
+    <text x="707" y="460" fill="#faf8ff" font-size="24" font-weight="600" letter-spacing="-0.7">AI conversation</text>
+
+    <text x="93" y="501" fill="#817594" font-size="15">React interface</text>
+    <text x="93" y="526" fill="#817594" font-size="15">Node.js gateway</text>
+    <text x="400" y="501" fill="#817594" font-size="15">Python / Flask</text>
+    <text x="400" y="526" fill="#817594" font-size="15">TensorFlow</text>
+    <text x="707" y="501" fill="#d4cbe5" font-size="15">Google Vertex AI</text>
+    <text x="707" y="526" fill="#d4cbe5" font-size="15">Adaptive responses</text>
+
+    <path d="M331 465H361" stroke="#8b81a6" stroke-width="1.7" marker-end="url(#arrow)"/>
+    <path d="M638 465H668" stroke="#8b81a6" stroke-width="1.7" marker-end="url(#arrow)"/>
+
+    <path d="M68 639H932" stroke="#d5cfe3"/>
+    <text x="68" y="684" fill="#817594" font-size="11" font-weight="700" letter-spacing="2.3">ARCHITECTURE OVERVIEW</text>
+    <text x="932" y="684" fill="#817594" text-anchor="end" font-size="12">Model inference meets a useful interface.</text>
+  </g>
+</svg>

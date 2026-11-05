@@ -1,55 +1,24 @@
-import { ArrowUpRight, Github } from "lucide-react"
-import { projects, repositories, siteConfig } from "@/lib/portfolio-data"
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+import { featuredProjects, publishedProjects, repositories, siteConfig } from "@/lib/portfolio-data"
 import FeaturedProject from "./featured-project"
-import Reveal from "./reveal"
-import SectionHeading from "./section-heading"
+import SweepText from "./sweep-text"
 
 export default function Projects() {
-  const featured = projects.filter((project) => project.featured)
-
-  return (
-    <section id="projects" className="section section-projects">
-      <div className="section-shell">
-        <Reveal>
-          <SectionHeading
-            eyebrow="03 / SELECTED WORK"
-            title="Featured Projects"
-            description="Selected projects where I turn data and AI models into working products."
-          />
-        </Reveal>
-
-        <div className="featured-list">
-          {featured.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 80}>
-              <FeaturedProject project={project} index={index} />
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="repository-index">
-          <Reveal className="repository-heading">
-            <div>
-              <p className="eyebrow">FULL GITHUB INDEX</p>
-              <h3>More experiments, builds, and studies.</h3>
-            </div>
-            <a href={siteConfig.github} target="_blank" rel="noreferrer">
-              <Github size={17} /> GitHub profile <ArrowUpRight size={16} />
-            </a>
-          </Reveal>
-          <div className="repository-list">
-            {repositories.map((repository, index) => (
-              <Reveal key={repository.name} delay={(index % 4) * 45}>
-                <a className="repository-row" href={repository.href} target="_blank" rel="noreferrer">
-                  <span className="repository-number">{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{repository.name}</strong>
-                  <span className="repository-topic">{repository.topic}</span>
-                  <ArrowUpRight size={17} aria-hidden="true" />
-                </a>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+  return <section id="work" className="work-page section-shell" aria-labelledby="work-title">
+    <header className="page-heading work-heading">
+      <div><p className="page-label">{String(featuredProjects.length).padStart(2, "0")} selected projects</p><h1 id="work-title">Work<span>.</span></h1></div>
+      <p className="page-intro">An exploration of data, machine learning, and the systems that make them useful. A closer look at the problems, process, and work behind each project.</p>
+    </header>
+    <div className="work-grid">{featuredProjects.map((project, index) => <FeaturedProject key={project.slug} project={project} index={index} total={featuredProjects.length} />)}</div>
+    <section className="work-archive" aria-labelledby="archive-title">
+      <div className="archive-intro"><h2 id="archive-title">From the archive.</h2><p>More experiments, tools, and technical explorations.</p></div>
+      <div className="archive-list">
+        {publishedProjects.filter((project) => !project.featured).map((project) => <Link className="archive-item" href={`/projects/${project.slug}`} key={project.slug}><span>{project.shortName}</span><span>{project.category}</span><ArrowUpRight size={23} aria-hidden="true" /></Link>)}
+        {repositories.filter((repository) => !publishedProjects.some((project) => project.links.some((link) => link.href === repository.href))).map((repository) => <a className="archive-item" key={repository.href} href={repository.href} target="_blank" rel="noreferrer"><span>{repository.name}<span className="archive-description">{repository.description}</span></span><span>{repository.topic}</span><ArrowUpRight size={23} aria-hidden="true" /></a>)}
       </div>
+      <a className="editorial-link" href={siteConfig.github} target="_blank" rel="noreferrer">More on GitHub <ArrowUpRight size={17} aria-hidden="true" /></a>
     </section>
-  )
+    <div className="work-closing"><p>Have something in mind?</p><Link href="/contact" className="sweep-link"><SweepText text="Let's talk" /><ArrowUpRight aria-hidden="true" /></Link></div>
+  </section>
 }

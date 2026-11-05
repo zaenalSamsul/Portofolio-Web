@@ -1,35 +1,15 @@
 import { experiences } from "@/lib/portfolio-data"
-import Reveal from "./reveal"
-import SectionHeading from "./section-heading"
-import TechBadge from "./tech-badge"
+import ExperienceTimeline from "./experience-timeline"
 
 export default function Experience() {
   return (
-    <section id="experience" className="section">
+    <section id="experience" className="section editorial-experience" aria-labelledby="experience-title">
       <div className="section-shell">
-        <Reveal>
-          <SectionHeading eyebrow="02 / EXPERIENCE" title="Building across data, models, and applications." />
-        </Reveal>
-        <div className="timeline">
-          {experiences.map((experience, index) => (
-            <Reveal key={`${experience.company}-${experience.role}`} delay={index * 100} className="timeline-row">
-              <div className="timeline-marker"><span>0{index + 1}</span></div>
-              <div className="timeline-date">{experience.period}</div>
-              <article className="experience-card">
-                <div className="experience-heading">
-                  <div><p>{experience.company}</p><h3>{experience.role}</h3></div>
-                  <p className="experience-summary">{experience.summary}</p>
-                </div>
-                <ul>
-                  {experience.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
-                </ul>
-                <div className="badge-list">
-                  {experience.tech.map((tech) => <TechBadge key={tech}>{tech}</TechBadge>)}
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+        <header className="editorial-section-heading">
+          <h2 id="experience-title">Experience.</h2>
+          <p>Work across data engineering, applied AI, and technical education.</p>
+        </header>
+        <ExperienceTimeline experiences={experiences} />
       </div>
     </section>
   )

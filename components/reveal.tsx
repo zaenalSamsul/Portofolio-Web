@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { useMotionPolicy } from "./motion-provider"
 
 export default function Reveal({
   children,
@@ -13,6 +14,7 @@ export default function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
+  const { allowMotion } = useMotionPolicy()
 
   useEffect(() => {
     const element = ref.current
@@ -35,7 +37,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      className={`reveal ${visible && allowMotion ? "is-visible" : ""} ${className}`}
       style={{ "--reveal-delay": `${delay}ms` } as React.CSSProperties}
     >
       {children}

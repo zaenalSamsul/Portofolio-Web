@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760" fill="none">
+  <rect width="1000" height="760" fill="#163c30"/>
+  <g font-family="Arial, sans-serif">
+    <circle cx="76" cy="72" r="7" fill="#b9cf9a"/>
+    <text x="98" y="81" fill="#f1f5e8" font-size="28" font-weight="600">Modnance</text>
+    <text x="850" y="78" text-anchor="end" fill="#bdcdb9" font-size="12" letter-spacing="2">AI + AUTOMATION</text>
+    <text x="62" y="174" fill="#d2dec7" font-size="13" letter-spacing="2">CONVERSATION TO WORKFLOW</text>
+    <text x="62" y="228" fill="#f1f5e8" font-size="42" font-weight="500">A financial assistant.</text>
+    <text x="62" y="279" fill="#f1f5e8" font-size="42" font-weight="500">Inside the conversation.</text>
+    <path d="M185 399H814" stroke="#8ca381" stroke-width="2" stroke-dasharray="6 6"/>
+    <g fill="#224b3c" stroke="#6d8a68"><rect x="62" y="342" width="183" height="128" rx="12"/><rect x="293" y="342" width="183" height="128" rx="12"/><rect x="524" y="342" width="183" height="128" rx="12"/><rect x="755" y="342" width="183" height="128" rx="12"/></g>
+    <g fill="#c4d7ab" font-size="12"><text x="81" y="370">01 / INPUT</text><text x="312" y="370">02 / UNDERSTAND</text><text x="543" y="370">03 / AUTOMATE</text><text x="774" y="370">04 / STORE</text></g>
+    <g fill="#f4f7ee" font-size="22"><text x="81" y="408">Messaging</text><text x="312" y="408">Gemini</text><text x="543" y="408">n8n</text><text x="774" y="408">PostgreSQL</text></g>
+    <g fill="#c1d0b9" font-size="13"><text x="81" y="440">Discord / WhatsApp</text><text x="312" y="440">Intent + extraction</text><text x="543" y="440">Connected workflows</text><text x="774" y="440">Transaction records</text></g>
+    <g fill="#b9cf9a"><circle cx="268" cy="399" r="5"/><circle cx="500" cy="399" r="5"/><circle cx="731" cy="399" r="5"/></g>
+    <path d="M846 471V527H153V471" stroke="#74906b" stroke-width="2"/>
+    <rect x="337" y="509" width="326" height="37" rx="18" fill="#163c30" stroke="#6b8563"/>
+    <text x="500" y="533" text-anchor="middle" font-size="12" fill="#d3dfc8" letter-spacing=".7">RECORD · RETRIEVE · RESPOND</text>
+    <path d="M62 640H938" stroke="#56764e"/>
+    <text x="62" y="678" fill="#c8d6be" font-size="12" letter-spacing="2">ARCHITECTURE OVERVIEW</text>
+    <text x="938" y="678" text-anchor="end" fill="#c8d6be" font-size="13">Python · REST APIs · Docker</text>
+  </g>
+</svg>

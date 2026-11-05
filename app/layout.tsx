@@ -1,32 +1,47 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Analytics } from "@vercel/analytics/next"
+import localFont from "next/font/local"
 import "./globals.css"
+import { siteConfig } from "@/lib/portfolio-data"
+import { canonicalUrl, indexingRobots, productionSiteUrl } from "@/lib/deployment"
+import { MotionProvider } from "@/components/motion-provider"
+import LegacyAnchors from "@/components/legacy-anchors"
+
+const editorialFont = localFont({
+  src: [
+    { path: "../public/fonts/InstrumentSerif-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/InstrumentSerif-Italic.ttf", weight: "400", style: "italic" },
+  ],
+  variable: "--font-editorial",
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
+})
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://zaenalsyamsyularief-porto.vercel.app"),
+  metadataBase: productionSiteUrl,
   title: {
-    default: "Zaenal Syamsyul Arief | AI Engineer & Data Scientist",
+    default: `${siteConfig.name} | ${siteConfig.role}`,
     template: "%s | Zaenal Syamsyul Arief",
   },
   description:
-    "AI Engineer and Data Scientist building applications across Machine Learning, NLP, Computer Vision, data engineering, and LLM integration.",
+    "Data & AI Engineer building dependable data pipelines, machine learning systems, and LLM-powered applications. Explore selected projects and engineering experience.",
   authors: [{ name: "Zaenal Syamsyul Arief" }],
   creator: "Zaenal Syamsyul Arief",
-  alternates: { canonical: "/" },
+  alternates: { canonical: canonicalUrl("/") },
+  robots: indexingRobots,
   openGraph: {
     type: "website",
-    url: "/",
-    title: "Zaenal Syamsyul Arief | AI Engineer & Data Scientist",
+    url: canonicalUrl("/"),
+    title: `${siteConfig.name} | ${siteConfig.role}`,
     description: "Building intelligent systems from data to deployment.",
     siteName: "Zaenal Syamsyul Arief Portfolio",
-    images: [{ url: "/profile.webp", width: 1200, height: 1200, alt: "Zaenal Syamsyul Arief" }],
+    images: [{ url: "/zaenal-portrait.png", width: 1254, height: 1254, alt: "Zaenal Syamsyul Arief" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zaenal Syamsyul Arief | AI Engineer & Data Scientist",
+    title: `${siteConfig.name} | ${siteConfig.role}`,
     description: "Building intelligent systems from data to deployment.",
-    images: ["/profile.webp"],
+    images: ["/zaenal-portrait.png"],
   },
   icons: {
     icon: "/za-logo.png",
@@ -41,10 +56,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={editorialFont.variable} data-motion="static" suppressHydrationWarning>
       <body>
-        {children}
-        <Analytics />
+        <MotionProvider><LegacyAnchors />{children}</MotionProvider>
       </body>
     </html>
   )

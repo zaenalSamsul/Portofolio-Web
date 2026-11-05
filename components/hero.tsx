@@ -1,67 +1,35 @@
-import Image from "next/image"
-import { ArrowDownRight, Download, Github, Linkedin, Mail, MapPin } from "lucide-react"
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 import { siteConfig } from "@/lib/portfolio-data"
+import SweepText from "./sweep-text"
+
+const sections = [
+  { id: "work", label: "Work", note: "Selected projects" },
+  { id: "about", label: "About", note: "The person & the practice" },
+  { id: "contact", label: "Contact", note: "Start a conversation" },
+] as const
 
 export default function Hero() {
-  return (
-    <section id="home" className="hero">
-      <div className="section-shell hero-layout">
-        <div className="hero-copy">
-          <p className="hero-name hero-enter hero-delay-2">Hi, I&apos;m Zaenal Syamsyul Arief.</p>
-          <h1 className="hero-enter hero-delay-3">
-            AI Engineer <span>&amp; Data Scientist.</span>
-          </h1>
-          <p className="hero-kicker hero-enter hero-delay-4">Building intelligent systems from data to deployment.</p>
-          <p className="hero-description hero-enter hero-delay-5">
-            I build AI-powered applications using Machine Learning, NLP, Computer Vision, and LLMs—from experimentation
-            to real-world deployment.
-          </p>
-
-          <div className="hero-cta hero-enter hero-delay-6">
-            <a href="#projects" className="button button-primary">
-              Explore my work <ArrowDownRight size={18} aria-hidden="true" />
-            </a>
-            <a href={siteConfig.resume} download className="button button-secondary">
-              Download resume <Download size={17} aria-hidden="true" />
-            </a>
-          </div>
-
-          <div className="hero-meta hero-enter hero-delay-7">
-            <div className="social-list" aria-label="Social links">
-              <a href={siteConfig.github} target="_blank" rel="noreferrer">
-                <Github size={16} aria-hidden="true" /> GitHub
-              </a>
-              <a href={siteConfig.linkedin} target="_blank" rel="noreferrer">
-                <Linkedin size={16} aria-hidden="true" /> LinkedIn
-              </a>
-              <a href={`mailto:${siteConfig.email}`}>
-                <Mail size={16} aria-hidden="true" /> Email
-              </a>
-            </div>
-            <span className="hero-location"><MapPin size={15} aria-hidden="true" /> {siteConfig.location}</span>
-          </div>
-        </div>
-
-        <div className="hero-visual hero-enter hero-delay-4">
-          <div className="portrait-frame">
-            <div className="portrait-index" aria-hidden="true">01 / PROFILE</div>
-            <Image
-              src="/profile.webp"
-              alt="Zaenal Syamsyul Arief"
-              fill
-              priority
-              sizes="(max-width: 767px) 84vw, 38vw"
-              className="portrait-image"
-            />
-          </div>
-          <div className="tech-line" aria-label="Core technologies">
-            <span>Python</span><i />
-            <span>Machine Learning</span><i />
-            <span>NLP</span><i />
-            <span>Computer Vision</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+  return <section id="home" className="home-intro section-shell" aria-labelledby="hero-title">
+    <div className="home-profile">
+      <p className="home-name">{siteConfig.name}</p>
+      <h1 id="hero-title">Data &amp; AI<br /><strong className="role-highlight"><em>Engineer.</em></strong></h1>
+      <p className="home-description">I turn complex data into useful systems — from pipelines and models to intelligent applications.</p>
+    </div>
+    <nav className="home-navigation" aria-label="Explore the portfolio">
+      {sections.map((section) => (
+        <Link id={section.id} href={`/${section.id}`} key={section.id}>
+          <span className="home-nav-display">
+            <SweepText text={section.label} className="home-nav-word" />
+            <ArrowUpRight aria-hidden="true" />
+          </span>
+          <span className="home-nav-note">{section.note}</span>
+        </Link>
+      ))}
+    </nav>
+    <p className="home-footnote">Data. Models. <em>Possibilities.</em></p>
+    <span id="projects" className="legacy-anchor" aria-hidden="true" />
+    <span id="experience" className="legacy-anchor" aria-hidden="true" />
+    <span id="skills" className="legacy-anchor" aria-hidden="true" />
+  </section>
 }

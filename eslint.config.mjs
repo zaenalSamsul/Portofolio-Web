@@ -9,9 +9,12 @@ export default defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "playwright-report/**",
+    "test-results/**",
     "next-env.d.ts",
     "components/ui/**",
     "components/theme-provider.tsx",
     "hooks/**",
   ]),
+  { files: ["scripts/*.cjs"], rules: { "@typescript-eslint/no-require-imports": "off" } },
 ])
