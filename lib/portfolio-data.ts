@@ -130,8 +130,9 @@ const projectContent: ProjectContent[] = [
     category: "GENERATIVE AI / AUTOMATION",
     description:
       "A conversational finance assistant connecting Gemini, messaging platforms, and automated transaction workflows.",
-    image: "/projects/modnance-workflow.svg",
-    imageAlt: "Modnance workflow connecting messages, Gemini, automation, and PostgreSQL",
+    image: "/projects/modnance-demo-poster.jpg",
+    imageAlt: "Opening frame of the ModNance demo video",
+    previewVideo: "/projects/modnance-demo.mp4",
     featuredVisual: "modnance-workflow",
     featured: true,
     timeline: "October 2026 - present",
@@ -358,8 +359,9 @@ const projectDetails: Record<string, Pick<AuthoringProject, "period" | "status" 
     published: true,
     confirmationNotes: ["Confirm the exact personal role title; the CV describes development work but does not supply a project role title."],
     media: {
-      kind: "image", src: "/projects/modnance-workflow.svg", width: 1000, height: 760,
-      alt: "Architecture illustration of the Modnance messaging, Gemini, automation, and database workflow",
+      kind: "video", src: "/projects/modnance-demo.mp4", width: 1920, height: 1080,
+      alt: "ModNance demo: conversational finance workflows through messaging",
+      poster: { src: "/projects/modnance-demo-poster.jpg", width: 1280, height: 720, alt: "Opening frame of the ModNance demo video" },
     },
     evidence: [{
       id: "conversational-workflow", kind: "outcome", verified: true,
@@ -431,12 +433,32 @@ const projectDetails: Record<string, Pick<AuthoringProject, "period" | "status" 
       kind: "image", src: "/projects/mycareai-logo.webp", width: 1600, height: 599,
       alt: "Original MyCareAI project logo and tagline",
     },
-    gallery: [{
-      kind: "image", src: "/projects/mycareai-source.jpg", width: 369, height: 200,
-      alt: "MyCareAI application collage showing the landing page, mood chart, and chatbot interface",
-      caption: "Application presentation extracted from the owner's portfolio, page 3, at its original low resolution. It documents the interface rather than model accuracy.",
-      source: { label: "Open extracted portfolio image (page 3)", localRef: "/projects/mycareai-source.jpg" },
-    }],
+    gallery: [
+      {
+        kind: "image", src: "/projects/mycareai-home.png", width: 1575, height: 864,
+        alt: "MyCareAI landing page introducing AI-assisted emotional support",
+        caption: "Landing page introducing MyCareAI and its conversational support features.",
+        source: { label: "Open full-resolution screenshot", localRef: "/projects/mycareai-home.png" },
+      },
+      {
+        kind: "image", src: "/projects/mycareai-emotion-journal.png", width: 1575, height: 865,
+        alt: "MyCareAI emotion journal with a trend chart and monthly calendar",
+        caption: "Emotion journal with a trend chart and calendar. This view shows the interface before entries have been added.",
+        source: { label: "Open full-resolution screenshot", localRef: "/projects/mycareai-emotion-journal.png" },
+      },
+      {
+        kind: "image", src: "/projects/mycareai-chat.png", width: 1579, height: 872,
+        alt: "MyCareAI chat interface with a welcome message and message input",
+        caption: "Chat workspace showing the assistant's welcome message and conversation input.",
+        source: { label: "Open full-resolution screenshot", localRef: "/projects/mycareai-chat.png" },
+      },
+      {
+        kind: "image", src: "/projects/mycareai-education.png", width: 1573, height: 865,
+        alt: "MyCareAI educational library with emotion filters and article cards",
+        caption: "Educational library with emotion-based filters and article links.",
+        source: { label: "Open full-resolution screenshot", localRef: "/projects/mycareai-education.png" },
+      },
+    ],
     evidence: [
       {
         id: "emotion-service-integration", kind: "outcome", verified: true,

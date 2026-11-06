@@ -208,10 +208,18 @@ main:focus { outline:none; } [hidden] { display:none !important; }
 .case-cover { margin:0; }
 .case-media { background:#e1e5d8; padding:40px; display:grid; place-items:center; }
 .case-media-content { display:block; width:100%; height:auto; max-height:650px; object-fit:contain; }
+.project-image-trigger { display:grid; place-items:center; width:100%; min-width:0; cursor:zoom-in; }
+.project-image-dialog { position:fixed; inset:0; width:100vw; height:100dvh; max-width:none; max-height:none; margin:0; border:0; padding:76px 24px 24px; background:rgba(18,29,23,.96); color:var(--paper); overflow:hidden; }
+.project-image-dialog[open] { display:grid; place-items:center; }
+.project-image-dialog::backdrop { background:rgba(18,29,23,.96); }
+.project-image-full { display:block; width:auto; height:auto; max-width:100%; max-height:calc(100dvh - 100px); object-fit:contain; }
+.project-image-close { position:absolute; top:16px; right:20px; display:grid; place-items:center; width:44px; height:44px; border:1px solid rgba(255,255,255,.4); border-radius:50%; background:transparent; color:inherit; }
+.project-image-close:hover { background:rgba(255,255,255,.12); }
+.project-image-close:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
 .case-media-video { background:#d5e0da; padding:0; }
 .case-media-mycareai { background:#dfddea; padding:70px; }
 .case-media-data-pipeline-sentiment-analysis { background:#d4dfe3; }
-.case-cover .case-media-data-pipeline-sentiment-analysis img { max-width:800px; }
+.case-cover .case-media-data-pipeline-sentiment-analysis .case-media-content { max-width:800px; }
 .case-media-caption { font-size:15px; color:var(--muted); line-height:1.75; margin-top:17px; }
 .case-media-source { display:inline-flex; align-items:center; gap:8px; text-decoration:underline; text-underline-offset:4px; margin-top:7px; }
 .case-story { margin:90px auto 0; max-width:1160px; }

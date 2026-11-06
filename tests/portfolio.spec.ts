@@ -382,7 +382,7 @@ test.describe("editorial pages and navigation", () => {
       const transparentLinks = await page.locator("main a").evaluateAll((elements) => elements.filter((element) => getComputedStyle(element).opacity === "0").map((element) => element.textContent))
       expect(transparentLinks, pathname).toEqual([])
       if (pathname === "/work") {
-        const preview = page.locator(".project-visual-video")
+        const preview = page.locator(".project-visual-video").first()
         await preview.scrollIntoViewIfNeeded()
         await page.waitForTimeout(300)
         expect(await preview.evaluate((element) => (element as HTMLVideoElement).paused)).toBe(true)
@@ -528,6 +528,39 @@ test.describe("contact, source media and CV", () => {
     expect(html).not.toContain("92%")
     for (const href of await page.locator(".case-media-source").evaluateAll((elements) => elements.map((element) => element.getAttribute("href")))) {
       if (href?.startsWith("/")) expect((await request.get(href.split("#")[0])).status()).toBe(200)
+    }
+  })
+
+  test("project images open full-size with keyboard, close controls and mobile support", async ({ page }) => {
+    for (const width of [1440, 390]) {
+      await page.setViewportSize({ width, height: 900 })
+      for (const slug of ["stuntlytics", "mycareai", "data-pipeline-sentiment-analysis", "hybrid-recommendation-system"]) {
+        await page.goto(`/projects/${slug}`)
+        const trigger = page.locator(".project-image-trigger").last()
+        const source = await trigger.getAttribute("href")
+        await trigger.focus()
+        await page.keyboard.press("Enter")
+        const dialog = page.getByRole("dialog")
+        await expect(dialog).toBeVisible()
+        await expect(dialog.locator("img")).toHaveAttribute("src", source!)
+        await expect.poll(() => page.locator("body").evaluate((body) => body.style.overflow)).toBe("hidden")
+        const close = dialog.getByRole("button", { name: "Close full-size image" })
+        await expect(close).toBeFocused()
+        await page.keyboard.press("Tab")
+        await expect(trigger).not.toBeFocused()
+        await page.keyboard.press("Shift+Tab")
+        await expect(close).toBeFocused()
+        await page.keyboard.press("Escape")
+        await expect(dialog).toHaveCount(0)
+        await expect(trigger).toBeFocused()
+        await expect.poll(() => page.locator("body").evaluate((body) => body.style.overflow)).not.toBe("hidden")
+        await trigger.click()
+        await close.click()
+        await expect(dialog).toHaveCount(0)
+        await trigger.click()
+        await page.mouse.click(8, 8)
+        await expect(dialog).toHaveCount(0)
+      }
     }
   })
 

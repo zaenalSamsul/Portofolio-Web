@@ -1,5 +1,5 @@
-﻿import Image from "next/image"
-import Link from "next/link"
+﻿import Link from "next/link"
+import ProjectImage from "./project-image"
 import { ArrowLeft, ArrowUpRight } from "lucide-react"
 import {
   getProjectEvidence,
@@ -39,13 +39,11 @@ function SourceReference({ source, className }: { source: EvidenceSource; classN
 function ProjectMediaFigure({
   media,
   caption,
-  source,
   projectSlug,
   primary = false,
 }: {
   media: ProjectMedia
   caption?: string
-  source?: EvidenceSource
   projectSlug: string
   primary?: boolean
 }) {
@@ -68,21 +66,11 @@ function ProjectMediaFigure({
             Your browser does not support video. <a href={media.src}>Open the project video</a>.
           </video>
         ) : (
-          <Image
-            src={media.src}
-            alt={media.alt}
-            width={media.width}
-            height={media.height}
-            priority={primary}
-            sizes={primary ? "(max-width: 767px) 100vw, 1120px" : "(max-width: 767px) 100vw, 600px"}
-            className="case-media-content"
-            unoptimized={media.src.endsWith(".svg")}
-          />
+          <ProjectImage media={media} primary={primary} />
         )}
       </div>
       <figcaption className="case-media-caption">
         <p>{caption ?? media.alt}</p>
-        {source ? <SourceReference source={source} className="case-media-source" /> : null}
       </figcaption>
     </figure>
   )
@@ -156,7 +144,6 @@ export default function CaseStudy({ project }: { project: Project }) {
                     key={item.src}
                     media={item}
                     caption={item.caption}
-                    source={item.source}
                     projectSlug={project.slug}
                   />
                 ))}

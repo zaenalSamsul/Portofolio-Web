@@ -15,7 +15,7 @@ export default function FeaturedProject({ project, index, total }: { project: Pr
       </div>
     ) : <Link className="project-visual-link" href={`/projects/${project.slug}`} aria-label={`Explore ${project.name} case study`}>
       <div className="project-visual">
-        <Image src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1100px) calc((100vw - 102px) / 2), (max-width: 1440px) calc((100vw - 156px) / 2), 642px" className="project-visual-image" unoptimized={cover.src.endsWith(".svg")} />
+        <Image src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} className="project-visual-image" unoptimized />
       </div>
     </Link>}
     <div className="project-caption"><p><span className="project-index">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>{project.category}</p><span>{status}</span></div>
