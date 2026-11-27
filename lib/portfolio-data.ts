@@ -11,8 +11,8 @@ export const siteConfig = {
   github: "https://github.com/zaenalSamsul",
   linkedin: "https://www.linkedin.com/in/zaenal-syamsyul-arief",
   certificates: "https://bit.ly/SertifikatZaenalSyamsyulArief",
-  website: "https://zaenalsyamsyularief-porto.vercel.app",
-  resume: "/Zaenal-Syamsyul-Arief-Resume.pdf",
+  website: "https://www.heyzaenal.my.id/",
+  resume: "/CV_ZaenalSyamsyulArief_Resume.pdf",
 }
 
 export const aboutProfile = {
@@ -343,12 +343,12 @@ const projectContent: ProjectContent[] = [
 
 const cvPageOne: EvidenceSource = {
   label: "CV — professional experience and projects",
-  localRef: "/Zaenal-Syamsyul-Arief-Resume.pdf#page=1",
+  localRef: "/CV_ZaenalSyamsyulArief_Resume.pdf#page=1",
 }
 
 const cvPageTwo: EvidenceSource = {
   label: "CV — project details",
-  localRef: "/Zaenal-Syamsyul-Arief-Resume.pdf#page=2",
+  localRef: "/CV_ZaenalSyamsyulArief_Resume.pdf#page=2",
 }
 
 const projectDetails: Record<string, Pick<AuthoringProject, "period" | "status" | "order" | "published" | "media" | "evidence" | "gallery" | "confirmationNotes">> = {
